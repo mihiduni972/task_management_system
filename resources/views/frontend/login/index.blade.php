@@ -17,10 +17,36 @@
             <h1>Welcome</h1>
             <p>Sign in entering the information below</p>
 
-            <input type="text" placeholder="User Name">
-            <input type="password" placeholder="Password">
+            {{-- SUCCESS MESSAGE --}}
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-            <button>Sign in</button>
+            {{-- ERROR MESSAGE --}}
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+
+            {{-- LOGIN FORM --}}
+            <form method="POST" action="{{ route('login.submit') }}">
+                @csrf
+
+                <input type="text"
+                       name="username"
+                       placeholder="User Name"
+                       required>
+
+                <input type="password"
+                       name="password"
+                       placeholder="Password"
+                       required>
+
+                <button type="submit">Sign in</button>
+            </form>
         </div>
 
         <!-- RIGHT SIDE -->
@@ -33,3 +59,4 @@
 
 </body>
 </html>
+
