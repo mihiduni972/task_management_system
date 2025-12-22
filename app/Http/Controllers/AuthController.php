@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -30,14 +31,14 @@ class AuthController extends Controller
             'password' => $request->password,
         ])) {
 
+            // 🔐 Session fixation protection
             $request->session()->regenerate();
 
-            // ✅ SUCCESS MESSAGE (THIS WAS MISSING)
-            return redirect()->back()
+            // ✅ After login go to dashboard (3rd page)
+            return redirect()->route('dashboard')
                 ->with('success', 'Login Successfully');
         }
 
-        // ❌ Only when login fails
         return back()->with('error', 'Invalid Username or Password');
     }
 
@@ -53,5 +54,30 @@ class AuthController extends Controller
 
         return redirect()->route('login')
             ->with('success', 'Logged out successfully');
+    }
+
+    /**
+     * Show change password page
+     */
+    public function showChangePassword()
+    {
+        return view('frontend.change-password');
+    }
+
+    /**
+     * Update password
+     */
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        auth()->user()->update([
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('dashboard')
+            ->with('success', 'Password Updated Successfully');
     }
 }
