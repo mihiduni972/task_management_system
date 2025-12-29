@@ -1,0 +1,253 @@
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* ================= USERS PAGE ================= */
+
+.users-wrapper {
+    padding: 30px;
+}
+
+/* FULL WIDTH SUPPORT */
+.full-width {
+    width: 100%;
+    padding: 40px 60px;
+    box-sizing: border-box;
+}
+
+/* ================= HEADER ================= */
+
+.users-header {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.users-header h2 {
+    flex: 1;
+    font-weight: 600;
+}
+
+.users-header input {
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+/* ADD USER BUTTON */
+.add-btn {
+    background: #7c1616;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+/* ================= CARD ================= */
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    width: 100%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* ================= TABLE ================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #f5f5f5;
+    text-align: left;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+/* ================= ROLE BADGES ================= */
+
+.role {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.role.admin {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.role.employer {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+/* ================= STATUS ================= */
+
+.status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.status.pending {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* ================= ACTION BUTTONS (ROW STYLE) ================= */
+
+.action-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* View */
+.btn-view {
+    background: #22c1dc;
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Edit */
+.btn-edit {
+    background: #facc15;
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Delete */
+.btn-delete {
+    background: #ef4444;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* Remove form spacing */
+.action-row form {
+    margin: 0;
+}
+
+/* ================= SUCCESS MESSAGE ================= */
+
+.success-box {
+    background: #e6f4ea;
+    color: #1e7e34;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+/* ================= PAGINATION ================= */
+
+.pagination {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+/* ================= MODAL ================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    width: 380px;
+}
+
+.modal-content h3 {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.modal-content label {
+    display: block;
+    margin-top: 10px;
+}
+
+.modal-content input,
+.modal-content select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+}
+
+/* MODAL BUTTONS */
+.save-btn {
+    background: #7c1616;
+    color: white;
+    width: 100%;
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background: #e5e7eb;
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar-btn {
+    display: block;
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: 1px solid #7c1616;
+    color: #7c1616;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.sidebar-btn.active {
+    background: #7c1616;
+    color: #fff;
+}

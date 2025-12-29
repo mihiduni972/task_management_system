@@ -30,13 +30,9 @@ class AuthController extends Controller
             'username' => $request->username,
             'password' => $request->password,
         ])) {
-
-            // 🔐 Session fixation protection
             $request->session()->regenerate();
 
-            // ✅ After login go to dashboard (3rd page)
-            return redirect()->route('dashboard')
-                ->with('success', 'Login Successfully');
+            return $this->redirectByRole();
         }
 
         return back()->with('error', 'Invalid Username or Password');
@@ -77,7 +73,37 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('dashboard')
+        return $this->redirectByRole()
             ->with('success', 'Password Updated Successfully');
+    }
+
+    /**
+     * 🔹 Role based redirect (ADMIN / EMPLOYER)
+     */
+    private function redirectByRole()
+    {
+        $user = auth()->user();
+
+        // SAFETY CHECK
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
+        // ADMIN
+        if ($user->user_type === 'admin') {
+            return redirect()->route('dashboard')
+                ->with('success', 'Welcome Admin');
+        }
+
+        // EMPLOYER
+        if ($user->user_type === 'employer') {
+            return redirect()->route('tasks.index')
+                ->with('success', 'Welcome Employer');
+        }
+
+        // FALLBACK (unknown role)
+        Auth::logout();
+        return redirect()->route('login')
+            ->with('error', 'Unauthorized user type');
     }
 }

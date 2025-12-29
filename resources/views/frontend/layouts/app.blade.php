@@ -4,62 +4,58 @@
     <meta charset="UTF-8">
     <title>TOYAR</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/users.css') }}">
 </head>
 <body>
 
-<!-- ================= TOP NAVIGATION ================= -->
 <header class="top-nav">
     <img src="/images/toyar.png" class="nav-logo">
     <span class="nav-title">TOYAR</span>
 </header>
 
-<!-- ================= MAIN APP ================= -->
 <div class="app-container">
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
-        <a href="#" class="menu-btn">Daily Tasks</a>
 
+        @auth
+<a href="{{ route('tasks.index') }}"
+   class="menu-btn">
+   Daily Tasks
+</a>
+
+
+        <!-- USERS (ADMIN ONLY) -->
+        @if(auth()->user()->user_type === 'admin')
+   <a href="{{ route('admin.users') }}"
+   class="sidebar-btn {{ request()->routeIs('admin.users*') ? 'active' : '' }}">
+    Users
+</a>
+
+@endif
+
+        @endauth
+
+        <!-- BOTTOM -->
         <div class="sidebar-bottom">
-            <a href="#" class="profile-btn">
+            <a href="{{ route('password.change') }}" class="profile-btn">
                 <img src="/images/profile.jpg">
-                <span>John Doe</span>
+                @auth
+                    <span>{{ auth()->user()->username }}</span>
+                @endauth
             </a>
 
-            <button class="logout-btn">Logout</button>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button class="logout-btn">Logout</button>
+            </form>
         </div>
+
     </aside>
 
-    <!-- CONTENT -->
+    <!-- PAGE CONTENT -->
     <main class="content">
-        <div class="task-card">
-            <h2>ADD TASK</h2>
-
-            <label>Task</label>
-            <input type="text">
-
-            <label>Sub Task</label>
-            <input type="text">
-
-            <label>Status</label>
-            <select>
-                <option>Pending</option>
-                <option>Completed</option>
-            </select>
-
-            <div class="date-row">
-                <div class="date-field">
-                    <label>Start Date</label>
-                    <input type="date">
-                </div>
-                <div class="date-field">
-                    <label>End Date</label>
-                    <input type="date">
-                </div>
-            </div>
-
-            <button class="create-btn">CREATE</button>
-        </div>
+        @yield('content')
     </main>
 
 </div>
