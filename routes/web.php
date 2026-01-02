@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,80 +26,78 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 /*
 |--------------------------------------------------------------------------
-| PROTECTED ROUTES (AUTH REQUIRED)
+| AUTHENTICATED ROUTES
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth')->group(function () {
 
     /*
-    |----------------------------------------------------------------------
+    |--------------------------------------------------------------------------
     | DASHBOARD
-    |----------------------------------------------------------------------
+    |--------------------------------------------------------------------------
     */
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
 
     /*
-    |----------------------------------------------------------------------
-    | ADMIN ROUTES
-    |----------------------------------------------------------------------
+    |--------------------------------------------------------------------------
+    | ADMIN ROUTES (ADMIN ONLY)
+    |--------------------------------------------------------------------------
     */
+    Route::prefix('admin')
+        ->middleware('can:isAdmin')
+        ->group(function () {
 
-    // ✅ Admin - Users management (list)
-    Route::get('/admin/users', [UserController::class, 'index'])
-        ->name('admin.users');
+            Route::get('/users', [UserController::class, 'index'])
+                ->name('admin.users');
 
-    // Create user
-    Route::post('/admin/users', [UserController::class, 'store'])
-        ->name('admin.users.store');
+            Route::post('/users', [UserController::class, 'store'])
+                ->name('admin.users.store');
 
-    // 🔹 Edit user (form)
-    Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])
-        ->name('admin.users.edit');
+            Route::get('/users/{user}', [UserController::class, 'show'])
+                ->name('admin.users.show');
 
-    // 🔹 Update user
-    Route::put('/admin/users/{user}', [UserController::class, 'update'])
-        ->name('admin.users.update');
+            Route::get('/users/{user}/edit', [UserController::class, 'edit'])
+                ->name('admin.users.edit');
 
-    // Delete user
-    Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])
-        ->name('admin.users.delete');
+            Route::put('/users/{user}', [UserController::class, 'update'])
+                ->name('admin.users.update');
+
+            Route::delete('/users/{user}', [UserController::class, 'destroy'])
+                ->name('admin.users.destroy');
+        });
 
 
     /*
-    |----------------------------------------------------------------------
-    | EMPLOYER ROUTES
-    |----------------------------------------------------------------------
+    |--------------------------------------------------------------------------
+    | TASKS (ADMIN + EMPLOYER)
+    |--------------------------------------------------------------------------
     */
-
-    // Task list
     Route::get('/tasks', [TaskController::class, 'index'])
         ->name('tasks.index');
 
-    // Create task page
     Route::get('/tasks/create', [TaskController::class, 'create'])
         ->name('tasks.create');
 
-    // Store task
-    Route::post('/tasks/store', [TaskController::class, 'store'])
+    Route::post('/tasks', [TaskController::class, 'store'])
         ->name('tasks.store');
 
-    // Update task status
     Route::post('/tasks/{task}/status', [TaskController::class, 'updateStatus'])
         ->name('tasks.updateStatus');
 
 
     /*
-    |----------------------------------------------------------------------
-    | COMMON ROUTES (ADMIN + EMPLOYER)
-    |----------------------------------------------------------------------
+    |--------------------------------------------------------------------------
+    | PROFILE (ADMIN + EMPLOYER)
+    |--------------------------------------------------------------------------
     */
+    Route::get('/profile', [ProfileController::class, 'index'])
+        ->name('profile.index');
 
-    // Change Password
-    Route::get('/change-password', [AuthController::class, 'showChangePassword'])
-        ->name('password.change');
+    Route::post('/profile/update', [ProfileController::class, 'update'])
+        ->name('profile.update');
 
-    Route::post('/change-password', [AuthController::class, 'changePassword'])
-        ->name('password.update');
+    Route::post('/profile/password', [ProfileController::class, 'updatePassword'])
+        ->name('profile.password');
 });

@@ -11,8 +11,6 @@ class UserController extends Controller
     /**
      * 🔹 Show users list (Admin page)
      * GET /admin/users
-     * - Search by username
-     * - Pagination (8 per page)
      */
     public function index(Request $request)
     {
@@ -24,7 +22,7 @@ class UserController extends Controller
         }
 
         // 📄 Pagination
-        $users = $query->orderBy('created_at', 'desc')->paginate(8);
+        $users = $query->orderBy('created_at', 'desc')->paginate(5);
 
         return view('frontend.users.index', compact('users'));
     }
@@ -39,6 +37,7 @@ class UserController extends Controller
             'full_name' => 'required|string|max:255',
             'username'  => 'required|string|max:255|unique:users,username',
             'email'     => 'required|email|unique:users,email',
+            'phone'     => 'required|string|max:20|unique:users,phone',
             'birthdate' => 'nullable|date',
             'password'  => 'required|min:6',
             'user_type' => 'required|in:admin,employer',
@@ -48,6 +47,7 @@ class UserController extends Controller
             'full_name' => $request->full_name,
             'username'  => $request->username,
             'email'     => $request->email,
+            'phone'     => $request->phone,
             'birthdate' => $request->birthdate,
             'password'  => Hash::make($request->password),
             'user_type' => $request->user_type,
@@ -56,15 +56,6 @@ class UserController extends Controller
         return redirect()
             ->route('admin.users')
             ->with('success', 'User added successfully!');
-    }
-
-    /**
-     * 🔹 Edit user form
-     * GET /admin/users/{user}/edit
-     */
-    public function edit(User $user)
-    {
-        return view('frontend.users.edit', compact('user'));
     }
 
     /**
@@ -77,6 +68,7 @@ class UserController extends Controller
             'full_name' => 'required|string|max:255',
             'username'  => 'required|string|max:255|unique:users,username,' . $user->id,
             'email'     => 'required|email|unique:users,email,' . $user->id,
+            'phone'     => 'required|string|max:20|unique:users,phone,' . $user->id,
             'birthdate' => 'nullable|date',
             'user_type' => 'required|in:admin,employer',
         ]);
@@ -85,6 +77,7 @@ class UserController extends Controller
             'full_name' => $request->full_name,
             'username'  => $request->username,
             'email'     => $request->email,
+            'phone'     => $request->phone,
             'birthdate' => $request->birthdate,
             'user_type' => $request->user_type,
         ]);

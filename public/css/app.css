@@ -12,15 +12,22 @@ body {
     background: #f5f5f5;
 }
 
-/* ================= TOP NAVIGATION ================= */
+/* ================= TOP NAV ================= */
 .top-nav {
     height: 70px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: space-between;
     padding: 0 30px;
     background: linear-gradient(90deg, #000000, #1a0000, #4b0000, #7b1b1b);
     box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+/* ================= NAV LEFT ================= */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .nav-logo {
@@ -33,6 +40,79 @@ body {
     color: #E53935;
 }
 
+/* ================= NAV RIGHT ================= */
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+/* ================= PROFILE DROPDOWN ================= */
+.profile-dropdown {
+    position: relative;
+}
+
+.profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    backdrop-filter: blur(6px);
+}
+
+.profile-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.profile-avatar {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #ff5252, #b71c1c);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.profile-name {
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+/* ================= DROPDOWN MENU ================= */
+.dropdown-menu {
+    position: absolute;
+    top: 52px;
+    right: 0;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    min-width: 160px;
+    overflow: hidden;
+    display: none;
+    z-index: 1000;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: #f3f3f3;
+}
+
 /* ================= APP LAYOUT ================= */
 .app-container {
     display: flex;
@@ -41,179 +121,140 @@ body {
 
 /* ================= SIDEBAR ================= */
 .sidebar {
-    width: 260px;
-    margin: 20px;
+    width: 220px;
+    min-width: 220px;
     background: #ffffff;
-    border-radius: 22px;
-    padding: 20px;
+    padding: 10px;
     position: relative;
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-/* ================= MENU BUTTONS (Daily Tasks + User) ================= */
-.menu-btn {
-    display: block;
-    padding: 14px;
-    border-radius: 30px;
-    text-align: center;
-    text-decoration: none;
+/* ================= SIDEBAR TITLE ================= */
+.sidebar-title {
+    font-size: 14px;
     font-weight: 600;
-
-    color: #7b1b1b;
-    border: 1px solid #7b1b1b;
-    background: #ffffff;
-
-    margin-bottom: 14px;   /* 🔥 spacing between buttons */
-
-    transition: all 0.3s ease;
+    color: #2d2d2d;
+    border-bottom: 1px solid #ddd;
+    margin: 10px;
+    padding-bottom: 10px;
+    text-align: center;
 }
 
-/* ACTIVE */
-.menu-btn.active {
-    background: #7b1b1b;
-    color: #ffffff;
-}
-
-/* HOVER */
-.menu-btn:hover {
-    background: #f4eaea;
-}
-
-/* ================= SIDEBAR BOTTOM ================= */
-.sidebar-bottom {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-}
-
-/* ================= PROFILE BUTTON ================= */
-.profile-btn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    padding: 12px;
-    margin-bottom: 12px;
-
-    background: #f4f4f4;
-    border-radius: 16px;
-
+/* ================= SIDEBAR LINKS ================= */
+.menu-btn,
+.sidebar-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
     text-decoration: none;
     color: #333;
-
-    border: 1px solid #e0e0e0;
-
-    box-shadow: inset 0 1px 2px rgba(255,255,255,0.8),
-                0 4px 10px rgba(0,0,0,0.06);
-
-    transition: all 0.3s ease;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background 0.25s ease;
+    font-weight: 500;
 }
 
-.profile-btn img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+.menu-btn:hover,
+.sidebar-btn:hover {
+    background: #f2f2f2;
 }
 
-.profile-btn:hover {
-    background: #ffffff;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+.menu-btn.active,
+.sidebar-btn.active {
+    background: #f2f2f2;
 }
 
-/* ================= LOGOUT ================= */
+/* ================= LOGOUT BUTTON (MODERN) ================= */
+.logout-form {
+    position: absolute;
+    bottom: 20px;
+    left: 15px;
+    right: 15px;
+}
+
 .logout-btn {
     width: 100%;
-    padding: 12px;
-    border-radius: 16px;
+    padding: 14px 0;
     border: none;
-    background: #7b1b1b;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #b91c1c, #7c1616);
     color: #ffffff;
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
+    transition: all 0.3s ease;
+    
 }
 
 .logout-btn:hover {
-    background: #8f1f1f;
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #dc2626, #991b1b);
+    
 }
 
-/* ================= CONTENT ================= */
+.logout-btn:active {
+    transform: scale(0.97);
+}
+
+/* ================= MAIN CONTENT ================= */
 .content {
     flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-right: 260px;
+    padding: 20px;
 }
 
-/* ================= TASK CARD ================= */
-.task-card {
-    width: 420px;
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-}
-
-.task-card h2 {
+/* ================= ALERTS ================= */
+.error-box {
+    background: #fdecea;
+    color: #b91c1c;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
     text-align: center;
-    color: #7b1b1b;
-    margin-bottom: 25px;
 }
 
-/* LABEL */
-.task-card label {
+.success-box {
+    background: #e6fffa;
+    color: #065f46;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* ================= CARDS ================= */
+.card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* ================= FORMS ================= */
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+label {
     font-size: 14px;
-    margin-bottom: 6px;
+    font-weight: 500;
+    margin-bottom: 5px;
     display: block;
 }
 
-/* INPUTS */
-.task-card input,
-.task-card select {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 16px;
-    border-radius: 8px;
-    border: 1px solid #e2b3b3;
-}
-
-.task-card input:focus,
-.task-card select:focus {
-    outline: none;
-    border-color: #7b1b1b;
-}
-
-/* DATE ROW */
-.date-row {
-    display: flex;
-    gap: 12px;
-}
-
-.date-field {
-    flex: 1;
-}
-
-/* CREATE BUTTON */
-.create-btn {
-    width: 100%;
-    padding: 14px;
-    border-radius: 16px;
-    border: none;
+.save-btn {
     background: #7b1b1b;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: bold;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
     cursor: pointer;
 }
 
-.create-btn:hover {
+.save-btn:hover {
     background: #8f1f1f;
-}
-.menu-btn.disabled {
-    background: #f3f4f6;
-    color: #9ca3af;
-    cursor: not-allowed;
-    pointer-events: none;
-    opacity: 0.7;
 }
