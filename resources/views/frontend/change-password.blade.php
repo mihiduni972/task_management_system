@@ -2,19 +2,34 @@
 
 @section('content')
 
-<div class="add-task-card">
-    <h2>Change Password</h2>
+<div class="card" style="max-width:400px;margin:auto;">
+    <h2 style="text-align:center;margin-bottom:15px;">
+        Change Password
+    </h2>
 
-    <form method="POST" action="/change-password">
+    {{-- SUCCESS --}}
+    @if(session('success'))
+        <div class="success-box">{{ session('success') }}</div>
+    @endif
+
+    {{-- ERROR --}}
+    @if(session('error'))
+        <div class="error-box">{{ session('error') }}</div>
+    @endif
+
+    <form method="POST" action="{{ route('profile.password.update') }}">
         @csrf
+
+        <label>Current Password</label>
+        <input type="password" name="current_password" required>
 
         <label>New Password</label>
         <input type="password" name="password" required>
 
-        <label>Confirm Password</label>
+        <label>Confirm New Password</label>
         <input type="password" name="password_confirmation" required>
 
-        <button class="create-btn">UPDATE</button>
+        <button class="save-btn">Update Password</button>
     </form>
 </div>
 

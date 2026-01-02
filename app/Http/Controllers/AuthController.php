@@ -32,6 +32,7 @@ class AuthController extends Controller
         ])) {
             $request->session()->regenerate();
 
+            // 🔥 role based redirect
             return $this->redirectByRole();
         }
 
@@ -49,7 +50,7 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login')
-            ->with('success', 'Logged out successfully');
+            ->with('toast', 'Logged out successfully');
     }
 
     /**
@@ -73,8 +74,9 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // 🔥 password change unama role based redirect
         return $this->redirectByRole()
-            ->with('success', 'Password Updated Successfully');
+            ->with('toast', 'Password updated successfully');
     }
 
     /**
@@ -89,19 +91,19 @@ class AuthController extends Controller
             return redirect()->route('login');
         }
 
-        // ADMIN
+        // ✅ ADMIN → USERS PAGE
         if ($user->user_type === 'admin') {
-            return redirect()->route('dashboard')
-                ->with('success', 'Welcome Admin');
+            return redirect()->route('admin.users')
+                ->with('toast', 'Welcome Admin');
         }
 
-        // EMPLOYER
+        // ✅ EMPLOYER → TASKS PAGE
         if ($user->user_type === 'employer') {
             return redirect()->route('tasks.index')
-                ->with('success', 'Welcome Employer');
+                ->with('toast', 'Welcome Employer');
         }
 
-        // FALLBACK (unknown role)
+        // FALLBACK
         Auth::logout();
         return redirect()->route('login')
             ->with('error', 'Unauthorized user type');
