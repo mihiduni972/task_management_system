@@ -25,7 +25,6 @@ class AuthController extends Controller
             'username' => 'required',
             'password' => 'required',
         ]);
-
         if (Auth::attempt([
             'username' => $request->username,
             'password' => $request->password,
