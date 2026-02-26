@@ -1,0 +1,271 @@
+/* ============================= */
+/* Work Log Page CSS Consolidated */
+/* ============================= */
+
+/* Body */
+body {
+    background-color: #f8f9fc;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ============================= */
+/* Work Log Card Styling */
+/* ============================= */
+.work-log-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+/* ============================= */
+/* Page Header */
+/* ============================= */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.page-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+}
+
+/* ============================= */
+/* Filter Section Styling */
+/* ============================= */
+.filter-section {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    border: 1px solid #eee;
+}
+
+.filter-group {
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.filter-group select.form-control {
+    min-width: 200px;
+    cursor: pointer;
+}
+/* ============================= */
+/* Reset Section Styling */
+/* ============================= */
+
+.btn-secondary {
+    display: inline-block;
+    padding: 9px 11px 9px 11px ;          
+    background-color: #7c1616;
+    color: #ffffff;              
+    border: none;                
+    border-radius: 8px;          
+    font-weight: 450;
+    font-size: 14px;             
+    text-decoration: none;       
+    cursor: pointer;
+    transition: all 0.2s ease;  
+}
+
+/* ============================= */
+/* Table Wrapper */
+/* ============================= */
+.table-wrapper {
+    background: #ffffff;
+    padding: 22px;
+    border-radius: 22px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+}
+
+/* ============================= */
+/* Modern Table Styling */
+/* ============================= */
+.modern-table,
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.modern-table thead th,
+.custom-table thead th,
+.modern-table tbody td,
+.custom-table tbody td {
+    padding: 12px 10px;
+    font-size: 14px;
+    vertical-align: middle;
+    height: 55px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.modern-table thead th,
+.custom-table thead th {
+    font-weight: 600;
+    color: #374151;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.custom-table thead th {
+    background-color: #f1f1f1;
+    color: #555;
+    border-bottom: 2px solid #ddd;
+}
+
+.modern-table tbody tr,
+.custom-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.modern-table tbody tr:hover,
+.custom-table tbody tr:hover {
+    background: #fafafa;
+}
+
+.modern-table tbody td,
+.custom-table tbody td {
+    border-bottom: 1px solid #f1f1f1;
+    color: #111827;
+}
+
+/* Action column cells center align */
+.daily-tasks-table td:last-child {
+    text-align: center;
+}
+
+/* ============================= */
+/* Modal Backdrop and Cards */
+/* ============================= */
+.custom-modal,
+.centered-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.task-card,
+.timelog-modal-card,
+.timelog-modal-card-white {
+    background: #ffffff;
+    width: 420px;
+    max-width: 95%;
+    padding: 28px 30px;
+    border-radius: 22px;
+    position: relative;
+    animation: scaleIn 0.25s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.timelog-modal-card-white {
+    width: 480px;
+    border-radius: 30px;
+    padding: 40px;
+}
+
+.card-title,
+.edit-modal-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    color: #7b1b1b;
+    margin-bottom: 22px;
+}
+
+.edit-modal-title {
+    font-size: 24px;
+    color: #1a2b4b;
+}
+
+.card-header-red h5 {
+    color: #7b1b1b;
+}
+
+.detail-item-dashed {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+/* ============================= */
+/* Modal Close Button */
+/* ============================= */
+.modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: #f3f3f3;
+    cursor: pointer;
+}
+
+/* ============================= */
+/* Animations */
+/* ============================= */
+@keyframes scaleIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+/* Action Column Layout */
+.action-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: relative; 
+    z-index: 10;  
+}
+
+/* Uniform Buttons */
+.action-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 95px;
+    height: 36px;
+    padding: 0;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid #e5e7eb;
+    background: #f3f4f6;
+    color: #111827;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    position: relative;   
+    z-index: 11;   
+}
+
+.action-btn:hover {
+    background: #e5e7eb;
+}

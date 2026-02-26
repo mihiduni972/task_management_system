@@ -1,0 +1,325 @@
+/* =====================================================
+    COMMON ATTENDANCE / USERS TABLE
+===================================================== */
+.attendance-table,
+.users-table {
+    width: 100% !important;
+    border-collapse: collapse;
+    table-layout: auto; /* Auto layout for full width distribution */
+}
+
+.attendance-table th,
+.attendance-table td,
+.users-table th,
+.users-table td {
+    padding: 12px 10px; 
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+    font-size: 14px;
+    text-align: center; /* Center alignment for all columns */
+}
+
+.attendance-table thead,
+.users-table thead {
+    background: #f3f4f6 !important;
+}
+
+.users-table th {
+    font-weight: 700;
+    color: #111827;
+}
+
+/* Date Column (First Column) */
+.users-table th:nth-child(1),
+.users-table td:nth-child(1) {
+    width: 20%; 
+    white-space: nowrap; 
+    text-align: center !important; 
+    padding-left: 25px; 
+}
+
+/* Status, Check-in, Out, Hours - proportional widths */
+.users-table th:nth-child(2), .users-table td:nth-child(2),
+.users-table th:nth-child(3), .users-table td:nth-child(3),
+.users-table th:nth-child(4), .users-table td:nth-child(4),
+.users-table th:nth-child(5), .users-table td:nth-child(5) {
+    width: 15%;
+}
+
+/* =====================================================
+    ACTION COLUMN - Right Aligned
+===================================================== */
+.users-table th.action-col,
+.users-table td.action-col {
+    width: 20%;
+    text-align: right !important;
+    padding-right: 25px; /* Balance with first column */
+}
+
+.action-container {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to right */
+    gap: 10px; 
+    align-items: center;
+}
+
+/* =====================================================
+    STATUS BADGE & BUTTONS
+===================================================== */
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.status-badge.present { background: #e6f6ed; color: #047857; }
+.status-badge.absent { background: #fdecea; color: #b91c1c; }
+
+.table-btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: none;
+    background: #e5e7eb;
+    color: #111827;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+
+.add-btn {
+    background: #7c1616;
+    color: #ffffff;
+    padding: 10px 22px;
+    border-radius: 24px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* =====================================================
+    MODALS & WRAPPER STYLES
+==================================================== */
+.table-wrapper {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 0; 
+    box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+    overflow: hidden; 
+}
+
+.modal-overlay, 
+.details-overlay {
+    position: fixed; 
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: none; /* Hidden by default */
+    align-items: center; 
+    justify-content: center;
+    z-index: 9999;
+    backdrop-filter: blur(2px); /* Subtle blur */
+}
+
+.modal-overlay.active { 
+    display: flex !important; /* Show when active */
+}
+
+.modal-card { 
+    background: #ffffff; 
+    width: 100%; 
+    max-width: 450px; 
+    border-radius: 25px;
+    padding: 30px; 
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    animation: popupIn 0.3s ease-out;
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #f3f4f6;
+    border: none;
+    font-size: 18px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.close-modal:hover {
+    background: #e5e7eb;
+    color: #000;
+}
+
+.modal-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #4b5563;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-group input, 
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+    border-color: #8b0000; /* Red border on focus */
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.half-width {
+    flex: 1;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+.btn-submit {
+    background: #8b0000;
+    color: #fff;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+@keyframes popupIn { 
+    from { 
+        opacity: 0; 
+        transform: scale(0.9); 
+    } 
+    to { 
+        opacity: 1; 
+        transform: scale(1); 
+    } 
+}
+
+.details-card-modern {
+    background: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 28px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    animation: popupIn 0.3s ease-out;
+}
+
+.close-x-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #f8fafc;
+    border: none;
+    font-size: 16px;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.close-x-btn:hover { 
+    background: #f1f5f9; 
+    color: #1e293b; 
+}
+
+.details-header-modern h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111;
+    margin: 0 0 30px 0;
+    text-align: left;
+}
+
+.detail-item-modern {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px dashed #e2e8f0; /* Dashed divider */
+}
+
+.detail-item-modern.no-border {
+    border-bottom: none;
+}
+
+.detail-item-modern .label {
+    color: #64748b;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.detail-item-modern .value {
+    color: #1e293b;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.details-footer-modern {
+    margin-top: 25px;
+}
+
+.footer-close-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 14px;
+    border: none;
+    background: #f1f5f9;
+    color: #475569;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.footer-close-btn:hover {
+    background: #e2e8f0;
+}

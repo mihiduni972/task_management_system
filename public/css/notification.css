@@ -1,0 +1,131 @@
+/* ======================= */
+/* NOTIFICATION BELL STYLING */
+/* ======================= */
+
+/* Bell icon container */
+.notifications-dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 1060; /* To ensure it stays above other elements */
+}
+
+/* Bell icon default style */
+.notifications-dropdown .nav-link.dropdown-toggle {
+    color: #000000;   
+    background: none;
+    border: none;
+    box-shadow: none;
+    font-size: 1.2rem;
+    position: relative;
+}
+
+/* Ensure dropdown arrow is hidden */
+.notifications-dropdown .dropdown-toggle::after {
+    display: none !important;
+}
+
+/* Badge style for notification count */
+.notifications-dropdown .badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    font-size: 10px;
+    padding: 3px 6px;
+    border-radius: 50%;
+    background-color: #dc3545; 
+    color: white;
+}
+
+/* Dropdown menu styling */
+.notifications-dropdown .dropdown-menu {
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+    margin-top: 10px;
+    z-index: 9999 !important;
+}
+
+/* Dropdown item styling */
+.notifications-dropdown .dropdown-item {
+    padding: 12px 16px;
+    white-space: normal; /* To wrap long text */
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.notifications-dropdown .dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.notifications-dropdown .dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Custom Scrollbar for the notification list */
+.notifications-dropdown .dropdown-menu::-webkit-scrollbar {
+    width: 6px;
+}
+.notifications-dropdown .dropdown-menu::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+.notifications-dropdown {
+    position: relative;
+}
+
+.notification-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    position: relative;
+}
+
+.notification-count {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background: red;
+    color: white;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+.notification-menu {
+    position: absolute;
+    right: 0;
+    top: 40px;
+    width: 260px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    display: none;
+    z-index: 999;
+}
+
+.notification-item {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+.notification-item p {
+    font-size: 13px;
+    margin: 5px 0;
+    color: #555;
+}
+
+.mark-read-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 0;
+}

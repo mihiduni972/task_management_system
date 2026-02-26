@@ -1,0 +1,121 @@
+/* ================= TABLE LAYOUT & ALIGNMENT ================= */
+#clientsTable {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#clientsTable th, 
+#clientsTable td {
+    text-align: left;
+    padding: 12px 15px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* --- COLUMN WIDTH CONTROL --- */
+#clientsTable th:nth-child(1), #clientsTable td:nth-child(1) { width: 50px; padding-left: 24px; }
+#clientsTable th:nth-child(2), #clientsTable td:nth-child(2) { width: 15%; }
+#clientsTable th:nth-child(3), #clientsTable td:nth-child(3) { width: 18%; }
+#clientsTable th:nth-child(4), #clientsTable td:nth-child(4) { width: 20%; }
+#clientsTable th:nth-child(6), #clientsTable td:nth-child(6) { width: 80px; }
+#clientsTable th:last-child, #clientsTable td:last-child { width: 220px; text-align: center; }
+
+/* ================= HEADER & CARDS ================= */
+.client-header {
+    margin-bottom: 20px !important; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.card.shadow-sm {
+    margin-top: 20px;
+    border-radius: 12px;
+}
+
+/* ================= MODAL GENERAL STYLING ================= */
+.modal-custom {
+    border-radius: 24px !important; 
+    border: none;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* View Client Modal  */
+#viewClientModal .modal-content {
+    border-radius: 24px !important;
+    padding: 10px;
+}
+
+#viewClientModal .modal-header {
+    padding: 25px 30px 10px 30px;
+    background: transparent;
+    border: none;
+}
+
+#viewClientModal .modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a202c;
+}
+
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px dashed #e2e8f0; 
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+.detail-value {
+    font-weight: 700;
+    color: #1e293b;
+    font-size: 1rem;
+}
+
+/* View Modal Footer Button */
+#viewClientModal .modal-footer {
+    justify-content: center !important;
+    border: none;
+    padding-bottom: 25px;
+}
+
+#viewClientModal .btn-dark {
+    background-color: #e5e7eb;
+    color: #475569;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+#viewClientModal .btn-dark:hover {
+    background-color: #f1f5f9;
+}
+
+/* Add Client Modal Header */
+#clientModal .modal-header {
+    padding: 20px 25px 5px 25px !important;
+}
+
+#clientModal .modal-header h4, 
+#clientModal .modal-header h5 {
+    margin-bottom: 0 !important;
+    font-weight: 700;
+}

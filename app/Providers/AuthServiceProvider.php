@@ -7,12 +7,21 @@ use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    protected $policies = [];
+    /**
+     * The policy mappings for the application.
+     */
+    protected $policies = [
+        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+    ];
 
+    /**
+     * Register any authentication / authorization services.
+     */
     public function boot(): void
     {
         $this->registerPolicies();
 
+        // 🔹 Admin role
         Gate::define('isAdmin', function ($user) {
             return $user->user_type === 'admin';
         });

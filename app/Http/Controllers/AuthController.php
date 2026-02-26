@@ -4,44 +4,62 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    /**
-     * Show login page
-     */
+    /* =========================
+       SHOW LOGIN PAGE
+    ========================= */
     public function showLogin()
     {
         return view('frontend.login.index');
     }
 
-    /**
-     * Handle login request
-     */
+    /* =========================
+       HANDLE LOGIN
+    ========================= */
     public function login(Request $request)
     {
         $request->validate([
-            'username' => 'required',
-            'password' => 'required',
+            'username' => 'required|string',
+            'password' => 'required|string',
         ]);
 
-        if (Auth::attempt([
-            'username' => $request->username,
-            'password' => $request->password,
-        ])) {
-            $request->session()->regenerate();
+        $credentials = $request->only('username', 'password');
 
-            // 🔥 role based redirect
-            return $this->redirectByRole();
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return $this->redirectByRole(Auth::user());
         }
 
-        return back()->with('error', 'Invalid Username or Password');
+        return back()->with('error', 'Invalid credentials');
     }
 
-    /**
-     * Logout user
-     */
+    /* =========================
+       REDIRECT BY ROLE
+    ========================= */
+    protected function redirectByRole($user)
+    {
+        switch ($user->user_type) {
+
+            case 'admin':
+                return redirect()->route('admin.users.index');
+
+            case 'employer':
+                return redirect()->route('tasks.index');
+
+            case 'attendance_marker':
+                return redirect()->route('attendance.mark');
+
+            default:
+                Auth::logout();
+                return redirect()->route('login');
+        }
+    }
+
+    /* =========================
+       LOGOUT
+    ========================= */
     public function logout(Request $request)
     {
         Auth::logout();
@@ -49,63 +67,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login')
-            ->with('toast', 'Logged out successfully');
-    }
-
-    /**
-     * Show change password page
-     */
-    public function showChangePassword()
-    {
-        return view('frontend.change-password');
-    }
-
-    /**
-     * Update password
-     */
-    public function changePassword(Request $request)
-    {
-        $request->validate([
-            'password' => 'required|confirmed|min:6',
-        ]);
-
-        auth()->user()->update([
-            'password' => Hash::make($request->password),
-        ]);
-
-        // 🔥 password change unama role based redirect
-        return $this->redirectByRole()
-            ->with('toast', 'Password updated successfully');
-    }
-
-    /**
-     * 🔹 Role based redirect (ADMIN / EMPLOYER)
-     */
-    private function redirectByRole()
-    {
-        $user = auth()->user();
-
-        // SAFETY CHECK
-        if (!$user) {
-            return redirect()->route('login');
-        }
-
-        // ✅ ADMIN → USERS PAGE
-        if ($user->user_type === 'admin') {
-            return redirect()->route('admin.users')
-                ->with('toast', 'Welcome Admin');
-        }
-
-        // ✅ EMPLOYER → TASKS PAGE
-        if ($user->user_type === 'employer') {
-            return redirect()->route('tasks.index')
-                ->with('toast', 'Welcome Employer');
-        }
-
-        // FALLBACK
-        Auth::logout();
-        return redirect()->route('login')
-            ->with('error', 'Unauthorized user type');
+        return redirect()->route('login');
     }
 }
