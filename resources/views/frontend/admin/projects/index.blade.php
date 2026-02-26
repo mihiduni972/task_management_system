@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('styles')
+@push('styles')
 <style>
     /* Pagination wrapper settings */
     .pagination-wrapper {
@@ -56,8 +56,65 @@
     padding: 10px 14px !important;  
     line-height: 1.4;
 }
+/* ===== Project View Modal Custom Design ===== */
+
+.project-view-modal .modal-body {
+    padding: 30px !important;
+}
+
+.project-view-modal .project-view-buttons {
+    margin-top: 35px !important;
+}
+
+.project-view-modal .modal-title {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+.detail-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #6c757d;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detail-box {
+    background: #f8f9fa;
+    border-radius: 14px;
+    padding: 12px 15px;
+    font-weight: 500;
+    color: #212529;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.project-view-buttons .btn-close-custom {
+    background-color: #7b1e24;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+}
+.project-view-buttons .btn-edit-custom {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+}
+
+.project-view-buttons .btn-edit-custom:hover {
+    background-color: #0056b3;
+}
 </style>
-@endsection
+@endpush
 
 @section('content')
 <div class="container mt-4">
@@ -138,59 +195,78 @@
                         </tr>
 
 {{-- VIEW DETAILS MODAL --}}
-<div class="modal fade" id="viewProjectModal{{ $project->id }}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered"> <div class="modal-content border-0 shadow-lg" style="border-radius: 25px; padding: 15px;">
-            
-            <div class="modal-body p-4">
-                <h4 class="fw-bold text-dark mb-4">Project Overview</h4>
+<div class="modal fade project-view-modal" id="viewProjectModal{{ $project->id }}" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0">
 
+            <div class="modal-body">
+
+                <h4 class="modal-title">Project Overview</h4>
+
+                {{-- Project Name --}}
                 <div class="mb-3">
-                    <label class="form-label text-muted small fw-medium mb-1">Project Name</label>
-                    <div class="p-3 bg-light rounded-4 text-dark fw-semibold border-0">
+                    <div class="detail-label">Project Name</div>
+                    <div class="detail-box">
                         {{ $project->name }}
                     </div>
                 </div>
 
+                {{-- Client --}}
                 <div class="mb-3">
-                    <label class="form-label text-muted small fw-medium mb-1">Client</label>
-                    <div class="p-3 bg-light rounded-4 text-dark border-0 d-flex align-items-center">
-                        <i class="fas fa-building me-2 text-secondary small"></i>
+                    <div class="detail-label">Client</div>
+                    <div class="detail-box">
+                        <i class="fas fa-building me-2 text-secondary"></i>
                         {{ $project->client->name ?? 'N/A' }}
                     </div>
                 </div>
 
+                {{-- Description --}}
                 <div class="mb-3">
-                    <label class="form-label text-muted small fw-medium mb-1">Description</label>
-                    <div class="p-3 bg-light rounded-4 text-secondary border-0" style="min-height: 80px; line-height: 1.5;">
+                    <div class="detail-label">Description</div>
+                    <div class="detail-box" style="min-height:70px;">
                         {{ $project->description ?? 'No description provided.' }}
                     </div>
                 </div>
 
+                {{-- Status --}}
                 <div class="mb-3">
-                    <label class="form-label text-muted small fw-medium mb-1">Initial Status</label>
-                    <div class="p-3 bg-light rounded-4 text-dark border-0">
-                        <i class="fas fa-circle me-2 text-{{ $statusColor }} small"></i>
+                    <div class="detail-label">Status</div>
+                    <div class="detail-box d-flex align-items-center">
+                        <span class="status-dot bg-{{ $statusColor }}"></span>
                         {{ ucfirst($project->status) }}
                     </div>
                 </div>
 
-                <div class="mb-4">
-                    <label class="form-label text-muted small fw-medium mb-1">Assign Team</label>
-                    <div class="p-3 bg-light rounded-4 border-0">
+                {{-- Assigned Team --}}
+                <div class="mb-5">
+                    <div class="detail-label">Assigned Team</div>
+                    <div class="detail-box">
                         @forelse($project->employers as $employer)
-                            <div class="mb-1 text-dark">
-                                <i class="fas fa-user-circle me-2 text-secondary"></i> {{ $employer->full_name }}
+                            <div class="mb-1">
+                                <i class="fas fa-user-circle me-2 text-secondary"></i>
+                                {{ $employer->full_name }}
                             </div>
                         @empty
-                            <span class="text-muted small italic">No members assigned</span>
+                            <span class="text-muted small">No members assigned</span>
                         @endforelse
                     </div>
                 </div>
 
-                <div class="d-flex gap-2 mt-4">
-                    <button type="button" class="btn btn-dark px-4 py-2 rounded-3 fw-bold flex-fill" style="background-color: #721c24; border: none;" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary px-4 py-2 rounded-3 fw-bold flex-fill" style="background-color: #007bff; border: none;" data-bs-toggle="modal" data-bs-target="#editProjectModal{{ $project->id }}">Edit Project</button>
+                {{-- Buttons --}}
+                <div class="project-view-buttons text-end">
+
+                    <button type="button"
+                            class="btn btn-close-custom px-4 py-2 fw-semibold"
+                            data-bs-dismiss="modal">
+                        Close
+                    </button>
+
                 </div>
+
+            </div>
+        </div>
+    </div>
+</div>
             </div>
         </div>
     </div>
