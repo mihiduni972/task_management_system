@@ -1,0 +1,123 @@
+/* ================= REPORT PAGE ================= */
+.reports-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* ================= TITLE ================= */
+.page-title {
+    margin-bottom: 12px;
+}
+
+/* ================= STATS ================= */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.stat-card {
+    background: #fff;
+    padding: 30px 18px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* ================= CHART AREA ================= */
+.charts-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 16px;
+    min-height: 0;
+    margin-top: 40px;
+}
+
+/* ================= CHART CARD ================= */
+.chart-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    height: 380px; }
+
+.chart-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+
+.project-list-container {
+    flex: 1;
+    overflow-y: auto; 
+    padding-right: 5px;
+}
+
+.project-item {
+    margin-bottom: 15px;
+}
+
+.project-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 8px;
+    background: #f3f4f6;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: #721212;
+    border-radius: 10px;
+}
+
+/* Scrollbar styling */
+.project-list-container::-webkit-scrollbar {
+    width: 4px;
+}
+.project-list-container::-webkit-scrollbar-thumb {
+    background: #e5e7eb;
+    border-radius: 10px;
+}
+/* ================= PAGE HEADER ================= */
+.page-header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* ================= EXPORT BUTTONS ================= */
+.export-buttons a.btn-export-csv {
+    background-color: #7c1616; 
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size:12px;
+    text-decoration: none;
+    margin-left: 10px; 
+    transition: background-color 0.3s ease;
+}
+

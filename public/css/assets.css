@@ -1,0 +1,134 @@
+/* === CONTAINER & CARD === */
+.custom-rounded-card {
+    border-radius: 20px !important;
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+    overflow: hidden;
+}
+
+/* === TABLE SPACING FIX === */
+.table th, .table td {
+    padding: 12px 10px !important;
+    vertical-align: middle !important;
+}
+
+.action-col {
+    white-space: nowrap !important;
+    width: 1%;
+    min-width: 190px;
+}
+
+/* === HEADER BUTTONS ALIGNMENT === */
+.header-action-wrapper {
+    display: flex !important;
+    justify-content: flex-end !important; 
+    gap: 12px !important;
+}
+
+.btn-danger-custom {
+    background-color: #7b1b1b !important; 
+    border: none !important;
+    color: white !important;
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+    padding: 10px 25px !important;
+    transition: all 0.3s ease;
+}
+
+/* === TABLE ACTION BUTTONS === */
+.action-container {
+    display: flex !important;
+    justify-content: center !important; 
+    gap: 6px !important;
+    align-items: center;
+}
+
+.btn-action-gray {
+    background-color: #e4e6e9 !important;
+    color: #555 !important;
+    border: none !important;
+    padding: 6px 12px !important;
+    border-radius: 8px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center;
+    white-space: nowrap !important;
+    transition: all 0.2s ease;
+}
+
+
+/* === SEARCH & FILTER SECTION === */
+.card-body form.d-flex {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+}
+
+.form-control, .form-select {
+    border-radius: 10px !important;
+    height: 40px;
+    max-width: 200px;
+}
+
+/* === MODAL & TOAST STYLING === */
+.modal-content {
+    border-radius: 20px !important;
+    border: none !important;
+}
+
+.modal-header {
+    border-bottom: none !important;
+    padding: 25px 25px 10px 25px !important;
+}
+
+.modal-body {
+    padding: 20px 25px !important;
+}
+
+.modal-body .form-select, .modal-body .form-control {
+    border-radius: 12px !important;
+    padding: 12px !important;
+    border: 1px solid #f0f0f0 !important;
+    background-color: #f8f9fa !important;
+    max-width: 100%;
+}
+
+.modal-footer {
+    border-top: none !important;
+    padding: 10px 25px 25px 25px !important;
+}
+
+.bg-success {
+    background-color: #A52A2A !important;
+}
+
+.table td, .table th {
+    padding: 12px 8px !important; 
+}
+
+
+.action-buttons-wrapper {
+    display: flex;
+    gap: 5px;
+    flex-wrap: nowrap; 
+    justify-content: center;
+}
+/* === SEARCH & FILTER SECTION GAP FIX === */
+.card-header .d-flex.justify-content-end {
+    margin-bottom: 2px !important; 
+    padding-top: 5px;
+}
+
+.card-body.p-0 {
+    padding-top: 5px !important; 
+}
+
+.table thead th {
+    border-top: 1px solid #f0f0f0 !important; 
+}
